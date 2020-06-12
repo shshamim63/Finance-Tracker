@@ -4,12 +4,12 @@
   <%= bootstrap_devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :email %>
+    <%= f.label :email, class: 'custom-color'%>
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password %>
+    <%= f.label :password, class: 'custom-color'%>
     <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
 
     <% if @minimum_password_length %>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, class: 'custom-color' %>
     <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
   </div>
 

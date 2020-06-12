@@ -1,5 +1,6 @@
 $font-primary: 'Poppins',Arial, sans-serif;
 $primary: #f8b739;
+$black: #000000;
 
 body{
 	font-family: $font-primary;
@@ -9,6 +10,7 @@ body{
 	background: #fafafa;
 	color: lighten($black,50%);
 }
+
 a {
 	transition: .3s all ease;
 	color: $primary;

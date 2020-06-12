@@ -10,12 +10,13 @@
   </head>
 
   <body>
-  <div class="wrapper d-flex align-items-stretch">
-    <%= render 'layouts/sidebar' %>
-    <div id="content" class="p-4 p-md-5">
-    <%= render 'layouts/navbar' %>
-      <%= yield %>
+    <div class="wrapper d-flex align-items-stretch">
+      <%= render 'layouts/sidebar' %>
+      <div id="content" class="p-4 p-md-5">
+        <%= render 'layouts/navbar' %>
+        <%= yield %>    
+      </div>
     </div>
-  </div>
+    <%= debug(params) if Rails.env.develpoment? %>
   </body>
 </html>
