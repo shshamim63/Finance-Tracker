@@ -5,6 +5,11 @@
       <div class="col-md-10">
         <%= text_field_tag :stock, params[:stock], placeholder: 'Stcok ticker symbol', autofocus: true, class: 'form-control search-box input-lg' %>
       </div>
+      <div>
+        <%= button_tag(type: :submit, class: 'btn btn-md btn-success') do%>
+          <i class="fa fa-search"></i> Search Stock
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
