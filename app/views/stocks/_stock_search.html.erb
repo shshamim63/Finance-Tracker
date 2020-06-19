@@ -1,0 +1,11 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><%= @stock.ticker%></h1>
+    <ul class="lead list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Stock Name: <%= @stock.name%>
+        <span class="badge badge-primary badge-pill">Last Price: <%= @stock.last_price%></span>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <h2>My Portfolio</h2>
 <div id="stock-lookup">
-  <%= form_tag '#', method: :get, id: 'stock-lookup-form' do%>
+  <%= form_tag stock_search_path, method: :get, id: 'stock-lookup-form' do%>
     <div class="from-group row no-padding text-center col-md-12">
       <div class="col-md-10">
         <%= text_field_tag :stock, params[:stock], placeholder: 'Stcok ticker symbol', autofocus: true, class: 'form-control search-box input-lg' %>
@@ -13,3 +13,6 @@
     </div>
   <% end %>
 </div>
+<% if @stock %>
+  <%= render 'stocks/stock_search'%>
+<% end %>

@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'dotenv-rails'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
 gem "stock_quote", '~> 3.0.0'

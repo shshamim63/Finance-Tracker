@@ -26,6 +26,7 @@ module FinanceTracker
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
+    StockQuote::Stock.new(api_key: ENV['STOCK_API'])
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
