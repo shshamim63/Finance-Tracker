@@ -3,14 +3,16 @@ class StocksController < ApplicationController
     if params[:stock].present?
       @stock = Stock.new_from_lookup(params[:stock])
       if @stock
-        render 'users/my_portfolio'
+        respond_to do |format|
+          format.js { render partial: 'users/result' }
+        end
       else
         flash[:danger] = 'You have entered the wrong company name'
-        render 'users/my_portfolio'
+        redirect_to my_portfolio_path
       end
     else
       flash[:danger] = 'You have entered an empty string'
-      render 'users/my_portfolio'
+      redirect_to my_portfolio_path
     end
   end
 end

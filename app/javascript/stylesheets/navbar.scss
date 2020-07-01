@@ -1,6 +1,4 @@
-$font-primary: 'Poppins',Arial, sans-serif;
-$primary: #f8b739;
-$black: #000000;
+@import './custom';
 
 body{
 	font-family: $font-primary;

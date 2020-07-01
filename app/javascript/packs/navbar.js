@@ -14,7 +14,6 @@ jQuery(function($) {
 
 	$('#sidebarCollapse').on('click', function () {
 			$('#sidebar').toggleClass('active');
-			console.log('I am working');
   });
 
 });
