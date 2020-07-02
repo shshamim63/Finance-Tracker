@@ -1,4 +1,6 @@
 class Stock < ApplicationRecord
+  has_many :user_stoks
+  has_many :users, through: :user_stocks
   def self.new_from_lookup(ticker_symbol)
     begin
       looked_up_stock = StockQuote::Stock.quote(ticker_symbol)

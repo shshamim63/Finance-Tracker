@@ -2,15 +2,14 @@
   <%= render 'layouts/messages' %>
 </div>
 <% if @stock %>
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4"><%= @stock.ticker%></h1>
-      <ul class="lead list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Stock Name: <%= @stock.name%>
-          <span class="badge badge-primary badge-pill">Last Price: <%= @stock.last_price%></span>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ul class="list-group">
+    <li class="list-group-item d-md-flex justify-content-between align-items-center">
+      <h5 class=""><%= @stock.ticker%></h5>
+      <p class="stock-name text-secondary">Stock Name: <%= @stock.name%></p>
+      <span class="badge badge-primary badge-pill">Last Price: <%= @stock.last_price%></span>
+      <div>
+        <%= link_to 'Add To stock', user_stocks_path(user: current_user, stock_ticker: @stock.ticker),class: 'btn btn-xs btn-success', data: {confirm: 'Are you sure'}, method: :post %>
+      </div>
+    </li>
+  </ul>
 <% end %>
