@@ -42,9 +42,11 @@ h1, h2, h3, h4, h5,
 .ftco-no-pt{
 	padding-top: 0;
 }
+
 .ftco-no-pb{
 	padding-bottom: 0;
 }
+
 //HEADING SECTION
 .heading-section{
 	font-size: 28px;
@@ -189,5 +191,14 @@ a[data-toggle="collapse"] {
 .footer{
 	p{
 		color: rgba(255,255,255,.5);
+	}
+}
+
+.nav.navbar-nav li {
+	.btn {
+		color: #fff !important;
+	}
+	.btn-danger:hover {
+		background-color: darken(#d95345, 20%);
 	}
 }
