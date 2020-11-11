@@ -1,0 +1,10 @@
+@import './custom';
+
+.custom-color {
+  color: lighten($black,50%);
+}
+ 
+
+.left-padding {
+  padding-left: 15px !important;
+}
