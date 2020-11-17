@@ -4,5 +4,19 @@ Rails.application.routes.draw do
   get 'my_portfolio', to: "users#my_portfolio" 
   get 'stock_search', to: "stocks#search"
   resources :user_stocks, only: [:create, :destroy]
+
+  resources :users, only: [:index, :show] do
+    resources :friendship, only: [] do
+      collection do
+        post :add, to: 'friendships#add'
+        post :unfriend, to: 'friendships#unfriend'
+        post :accept, to: 'friendships#accept'
+        post :reject, to: 'friendships#reject'
+        post :cancelled, to: 'friendships#cancelled'
+        post :block, to: 'friendships#block'
+        post :unblock, to: 'friendships#unblock'
+      end
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
