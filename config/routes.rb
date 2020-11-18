@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   get 'my_stocks', to: "users#my_stocks" 
   get 'stock_search', to: "stocks#search"
   resources :user_stocks, only: [:create, :destroy]
-
-  resources :users, only: [:index, :show] do
+  get 'search_users', to: "users#search"
+  get 'friends', to: 'users#friends'
+  resources :users, only: [:show] do
     resources :friendship, only: [] do
       collection do
         post :add, to: 'friendships#add'
