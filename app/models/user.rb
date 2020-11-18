@@ -43,6 +43,12 @@ class User < ApplicationRecord
 
   def self.search(params)
     params.strip!
+    searched_users = (find_by_frist_name(params)+ 
+                      find_by_last_name(params)+
+                      find_by_username(params)+
+                      find_by_email(params)
+                    ).uniq
+    searched_users ? searched_users : nil 
   end
 
   def self.find_by_frist_name(params)
