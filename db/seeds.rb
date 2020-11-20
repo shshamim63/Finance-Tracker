@@ -29,3 +29,13 @@ User.create(
   password: '123456'
 )
 
+Friendship.create(
+  user: User.first,
+  friend: User.second,
+  status: 'accepted'
+)
+Friendship.create(
+  user: User.first,
+  friend: User.third,
+  status: 'accepted'
+)

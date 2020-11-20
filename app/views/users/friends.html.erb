@@ -3,3 +3,13 @@
 <div id="users-results">
   <%= render 'userslist' %>
 </div>
+
+<% if @friends%>
+  <div class="container mt-4">
+    <div class="row justify-content-around">
+    <% @friends.each do |friend|%>
+      <%= render 'friendships/friend', user: friend%>
+    <% end %>
+    </div>
+  </div>
+<% end %>
