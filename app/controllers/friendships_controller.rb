@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-  before_action :authenticate_user!, find_user
+  before_action :authenticate_user!, :find_user
 
   def add
     friendship = current_user.friendships.build(friend: @user, status: 'pending')
