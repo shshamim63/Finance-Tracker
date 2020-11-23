@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   skip_before_action :authenticate_user!, only: [:my_stocks]
   def show
+    @blocked_users = current_user.active_blocked_user
   end
 
   def friends
@@ -20,7 +21,8 @@ class UsersController < ApplicationController
     if params[:search_params].blank?
       flash.now[:danger] = 'You have entered an empty string'
     else
-      @users = User.search(params[:search_params])
+      searched_users = User.search(params[:search_params])
+      @users = current_user.unblocked_users(searched_users)
       flash.now[:danger] = 'No match found' if @users.blank?
     end
     respond_to do |format|
