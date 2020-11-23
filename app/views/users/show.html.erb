@@ -10,37 +10,7 @@
                 <h4><%= @user.username%></h4>
                 <p class="text-secondary mb-1">Full Stack Developer</p>
                 <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                <%= link_to add_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-primary' do %>
-                  <i class="fas fa-user-plus"></i> Add Friend
-                <% end %>
-
-                <%= link_to accept_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-success' do %>
-                  <i class="fas fa-check-circle"></i> Accept
-                <% end %>
-
-                <%= link_to reject_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-warning' do %>
-                  <i class="fas fa-minus-circle"></i> Delete
-                <% end %>
-                
-                <%= link_to cancelled_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-dark' do %>
-                  <i class="fas fa-user-times"></i> Candel Request
-                <% end %>
-                <%= link_to block_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-secondary' do %>
-                  <i class="fas fa-ban"></i> Block
-                <% end %>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-check"></i> Friend
-                  </button>
-                  <div class="dropdown-menu">
-                    <%= link_to unfriend_user_friendships_path(@user), method: :post, class: 'dropdown-item' do%>
-                      <i class="fas fa-user-times"></i>Unfriend
-                    <% end %>
-                    <%= link_to block_user_friendships_path(@user), method: :post, class: 'dropdown-item' do%>
-                      <i class="fas fa-ban"></i>Block
-                    <% end %>
-                  </div>
-                </div>
+                <%= render 'friendships/friendship_status', user: @user%>
               </div>
             </div>
           </div>

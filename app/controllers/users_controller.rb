@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-  
+  skip_before_action :authenticate_user!, only: [:my_stocks]
   def show
   end
 
@@ -9,7 +9,11 @@ class UsersController < ApplicationController
   end
 
   def my_stocks
-    @user_stocks = current_user.stocks
+    if current_user
+      @user_stocks = current_user.stocks
+    else
+      flash.now[:info] = 'Try our service to get amazing support'
+    end
   end
 
   def search
