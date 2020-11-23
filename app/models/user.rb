@@ -41,6 +41,29 @@ class User < ApplicationRecord
     (friends + inverse_friends).compact.uniq
   end
 
+  def active_blocked_user
+    friends = friendships.map do |friendship|
+      friend = friendship.friend
+      friend if Friendship.current_status?(self, friend)&.blocked?
+    end
+  end
+
+  def passive_blocked_user
+    inverse_friends = inverse_friendships.map do |friendship| 
+      friend = friendship.user
+      friend if Friendship.current_status?(friend, self)&.blocked?
+    end
+  end
+
+  def total_blocked_user
+    (passive_blocked_user + active_blocked_user).compact.uniq
+  end
+
+  def unblocked_users(searched_users)
+    blocked_users = self.total_blocked_user
+    searched_users - blocked_users
+  end
+
   def self.search(params)
     params.strip!
     searched_users = (find_by_frist_name(params)+ 
