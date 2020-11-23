@@ -10,7 +10,9 @@
                 <h4><%= @user.username%></h4>
                 <p class="text-secondary mb-1">Full Stack Developer</p>
                 <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                <%= render 'friendships/friendship_status', user: @user%>
+                <% unless current_user == @user %>
+                  <%= render 'friendships/friendship_status' %>
+                <% end %>
               </div>
             </div>
           </div>

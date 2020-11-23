@@ -1,4 +1,4 @@
-<% current_status = Friendship.current_status?(current_user, user) %>
+<% current_status = Friendship.current_status?(current_user, @user) %>
 <% if current_status&.accepted? %>
   <div class="btn-group">
     <button type="button" class="btn btn-sm btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -8,10 +8,11 @@
       <%= link_to unfriend_user_friendships_path(@user), method: :post, class: 'dropdown-item' do%>
         <i class="fas fa-user-times"></i>Unfriend
       <% end %>
-      <%= link_to block_user_friendships_path(@user), method: :post, class: 'dropdown-item' do%>
+      <button class='dropdown-item' data-toggle="modal" data-target="#exampleModalCenter" >
         <i class="fas fa-ban"></i>Block
-      <% end %>
+      </button>
     </div>
+    <%= render 'friendships/block_user_confirmation_modal'%>
   </div>
 <% else %>
   <% if current_status&.pending?%>
@@ -31,8 +32,9 @@
     <%= link_to add_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-primary' do %>
       <i class="fas fa-user-plus"></i> Add Friend
     <% end %>
-    <%= link_to block_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-secondary' do %>
-      <i class="fas fa-ban"></i> Block
-    <% end %>
+    <button class='btn btn-sm btn-outline-secondary' data-toggle="modal" data-target="#exampleModalCenter">
+        <i class="fas fa-ban"></i>Block
+    </button>
+    <%= render 'friendships/block_user_confirmation_modal'%>
   <% end %>
 <% end %>
