@@ -29,6 +29,10 @@ class User < ApplicationRecord
     under_stock_limit? && !stock_already_added?(stock_symbol)
   end
 
+  def friend?(user)
+    Friendship.current_status?(user, self)&.accepted?
+  end
+  
   def friends
     friends = friendships.map do |friendship|
       friend = friendship.friend

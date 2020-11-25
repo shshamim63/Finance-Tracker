@@ -28,25 +28,40 @@ class FriendshipsController < ApplicationController
   end
 
   def reject
-    friendship = current_user.friendships.build(friend: @user, status: 'rejected')
+    if validate_for_reject(current_user, @user)
+      friendship = current_user.friendships.build(friend: @user, status: 'rejected')
 
-    if friendship.save
+      if friendship.save
+        redirect_back fallback_location: root_path
+      end
+    else
+      flash.now[:warning] = 'Invalid request'
       redirect_back fallback_location: root_path
     end
   end
   
   def cancelled
-    friendship = current_user.friendships.build(friend: @user, status: 'cancelled')
+    if validate_for_reject(current_user, @user)
+      friendship = current_user.friendships.build(friend: @user, status: 'cancelled')
 
-    if friendship.save
+      if friendship.save
+        redirect_back fallback_location: root_path
+      end
+    else
+      flash.now[:warning] = 'Invalid request'
       redirect_back fallback_location: root_path
     end
   end
   
   def unfriend
-    friendship = current_user.friendships.build(friend: @user, status: 'unfriended')
+    if current_user.friend?(@user)
+      friendship = current_user.friendships.build(friend: @user, status: 'unfriended')
 
-    if friendship.save
+      if friendship.save
+        redirect_back fallback_location: root_path
+      end
+    else
+      flash.now[:warning] = 'Invalid request'
       redirect_back fallback_location: root_path
     end
   end
@@ -61,9 +76,14 @@ class FriendshipsController < ApplicationController
 
 
   def unblock
-    friendship = current_user.friendships.build(friend: @user, status: 'unblocked')
+    if validate_for_unblock(current_user, )
+      friendship = current_user.friendships.build(friend: @user, status: 'unblocked')
 
-    if friendship.save
+      if friendship.save
+        redirect_back fallback_location: root_path
+      end
+    else
+      flash.now[:warning] = 'Invalid request'
       redirect_back fallback_location: root_path
     end
   end
@@ -82,5 +102,20 @@ class FriendshipsController < ApplicationController
   def validity_for_accept_request(user,friend)
     current_status = Friendship.current_status?(user, friend)
     current_status&.pending?
+  end
+
+  def validate_for_reject(user, friend)
+    current_status = Friendship.current_status?(user, friend)
+    (current_status.friend == user && current_status&.pending?) || !current_status&.blckoed?
+  end
+
+  def validate_for_cancelled(user, friend)
+    current_status = Friendship.current_status?(user, friend)
+    (current_status.user == user && current_status&.pending?) || !current_status&.blckoed?
+  end
+
+  def validate_for_unblock(user, friend)
+    current_status = Friendship.current_status?(user, friend)
+    current_status&.blocked?
   end
 end
