@@ -96,7 +96,7 @@ class FriendshipsController < ApplicationController
 
   def validity_for_friend_request(user,friend)
     current_status = Friendship.current_status?(user, friend)
-    current_status&.accepted? || current_status&.pending? || current_status&.blckoed?
+    current_status&.accepted? || current_status&.pending? || current_status&.blocked?
   end
 
   def validity_for_accept_request(user,friend)
@@ -106,7 +106,7 @@ class FriendshipsController < ApplicationController
 
   def validate_for_reject(user, friend)
     current_status = Friendship.current_status?(user, friend)
-    (current_status.friend == user && current_status&.pending?) || !current_status&.blckoed?
+    (current_status.friend == user && current_status&.pending?) || !current_status&.blocked?
   end
 
   def validate_for_cancelled(user, friend)
