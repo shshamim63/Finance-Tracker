@@ -147,6 +147,41 @@
             </div>
           </div>
         </div>
+        <div class="row gutters-sm">
+          <div class="col-sm-10 offset-md-1 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Stocks</i></h6>
+                <% if current_user == @user || current_user.friend?(@user)%>
+                  <% if @user_stocks %>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Symbol</th>
+                          <th scope="col">Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @user_stocks.each do |stock|%>
+                          <tr>
+                            <td><%= stock.name %></td>
+                            <td><%= stock.ticker %></td>
+                            <td>$<%= stock.last_price %></td>
+                          </tr>
+                        <%end%>    
+                      </tbody>
+                    </table>
+                  <%else%>
+                    <p class="text-info">This user does not have any stock</p>
+                  <%end%>
+                <%else%>
+                  <p class="text-info">You are not friend to this user</p>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:my_stocks]
   def show
     @blocked_users = current_user.active_blocked_user
+    @user_stocks = @user.stocks
   end
 
   def friends
