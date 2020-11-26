@@ -76,7 +76,7 @@ class FriendshipsController < ApplicationController
 
 
   def unblock
-    if validate_for_unblock(current_user, )
+    if validate_for_unblock(current_user, @user)
       friendship = current_user.friendships.build(friend: @user, status: 'unblocked')
 
       if friendship.save
