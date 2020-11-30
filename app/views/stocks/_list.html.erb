@@ -1,23 +1,25 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Symbol</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user_stocks.each do |user_stock| %>
+<% if current_user %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= user_stock.name %></td>
-        <td><%= user_stock.ticker %></td>
-        <td>$<%= user_stock.last_price %></td>
-        <td class='float-right'>
-          <%= link_to "Remove this stock", user_stock_path(user_stock), method: :delete,
-                                         data: {confirm: "Are you sure?"}, 
-                                         class: "btn btn-sm btn-danger" %>
-        </td>
+        <th scope="col">Name</th>
+        <th scope="col">Symbol</th>
+        <th scope="col">Price</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @user_stocks.each do |user_stock| %>
+        <tr>
+          <td><%= user_stock.name %></td>
+          <td><%= user_stock.ticker %></td>
+          <td>$<%= user_stock.last_price %></td>
+          <td class='float-right'>
+            <%= link_to "Remove this stock", user_stock_path(user_stock), method: :delete,
+                                          data: {confirm: "Are you sure?"}, 
+                                          class: "btn btn-sm btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

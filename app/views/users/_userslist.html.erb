@@ -1,0 +1,18 @@
+<% if params[:action] == 'search' %>
+  <div class="results-block">
+    <%= render 'layouts/messages' %>
+  </div>
+<% end %>
+<% if @users %>
+  <% @users.each do |user|%>
+    <ul class="list-group">
+    <%= link_to user_path(user) do %>
+      <li class="list-group-item d-md-flex justify-content-between align-items-center">
+        <h5 class=""><%= user.username%></h5>
+        <p class="stock-name text-secondary">Name: <%= user.full_name%></p>
+        <span class="badge badge-primary badge-pill">Email: <%= user.email%></span>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>

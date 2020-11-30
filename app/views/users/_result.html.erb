@@ -9,21 +9,23 @@
       <h5 class=""><%= @stock.ticker%></h5>
       <p class="stock-name text-secondary">Stock Name: <%= @stock.name%></p>
       <span class="badge badge-primary badge-pill">Last Price: <%= @stock.last_price%></span>
-      <% status = current_user.can_add_stock?(@stock.name) %>
-      <% if current_user.can_add_stock?(@stock.ticker)%>
-        <div>
-          <%= link_to 'Add To stock', user_stocks_path(user: current_user, stock_ticker: @stock.ticker),class: 'btn btn-xs btn-success', data: {confirm: 'Are you sure'}, method: :post %>
+      <% if current_user %>
+        <% status = current_user.can_add_stock?(@stock.name) %>
+        <% if current_user.can_add_stock?(@stock.ticker)%>
+          <div>
+            <%= link_to 'Add To stock', user_stocks_path(user: current_user, stock_ticker: @stock.ticker),class: 'btn btn-xs btn-success', data: {confirm: 'Are you sure'}, method: :post %>
+          </div>
+        <% else %>
+        <div class="badge badge-primary text-wrap" style="width: 6rem;">
+          Stock cannot be added because you have added
+          <% if !current_user.under_stock_limit?%>
+            10 stocks
+          <% end %>
+          <% if current_user.stock_already_added?(@stock.ticker)%>
+            this stock already.
+          <% end %>
         </div>
-      <% else %>
-      <div class="badge badge-primary text-wrap" style="width: 6rem;">
-        Stock cannot be added because you have added
-        <% if !current_user.under_stock_limit?%>
-          10 stocks
         <% end %>
-        <% if current_user.stock_already_added?(@stock.ticker)%>
-          this stock already.
-        <% end %>
-      </div>
       <% end %>
     </li>
   </ul>
