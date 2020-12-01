@@ -1,1 +1,48 @@
-<h1 class='bg-success'>Welcome to the Finance Tracker App</h1>
+<% if current_user %>
+  <h3>Welcome: <%= current_user.email %></h3>
+<% else %>
+  <div class="jumbotron">
+    <h2>Welcome to the Stock Management App!</h2>
+    <p class="lead">
+      You'll love managing your Stocks with our application. Sign up!
+    </p>
+  </div>
+
+  <div class="plans">
+    <div class="row justify-content-around clearfix">
+      <div class="col-md-4 ">
+        <h2 class="scheme">Premium Plan</h2>
+        <div class="price pull-right">
+          Price: $10
+        </div>
+        <div class="features">
+          <ul>
+            <li>Unlimited Image Uploads</li>
+            <li>Responsive design</li>
+            <li>Access anywhere</li>
+          </ul>
+        </div>
+        <p>
+          <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary sign-up' %>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2 class="scheme">Amaze Plan</h2>
+        <div class="price pull-right">
+          Price: $20
+        </div>
+        <div class="features">
+          <ul>
+            <li>Unlimited Image Uploads</li>
+            <li>Responsive design</li>
+            <li>Access anywhere</li>
+            <li class='extra'>Unlimited projects</li>
+          </ul>
+        </div>
+        <p>
+          <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary sign-up' %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
