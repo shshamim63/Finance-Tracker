@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
+  has_one :payment
+  accepts_nested_attributes_for :payment
+  
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
 
