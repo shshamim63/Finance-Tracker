@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :payment
+  belongs_to :plan
   accepts_nested_attributes_for :payment
   
   has_many :user_stocks
