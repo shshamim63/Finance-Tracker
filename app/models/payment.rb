@@ -4,7 +4,9 @@ class Payment < ApplicationRecord
   belongs_to :user
   
   def self.month_options
-    Date::MONTHNAMES.compact
+    month_list = []
+    Date::MONTHNAMES.compact.each_with_index { |val, idx| month_list.push([val, idx+1]) }
+    month_list
   end
 
   def self.year_options
@@ -12,11 +14,12 @@ class Payment < ApplicationRecord
   end
 
   def process_payment
-    customer = Stripe::Customer.create(email: email, card: token)
+    customer = Stripe::Customer.create({ email: email, card: token })
+    
     Stripe::Charge.create({ customer: customer.id,
-                            amount: 10000,
-                            description: 'Premium',
-                            currency: 'usd',
-    })
+                          amount: 10000,
+                          description: 'Premium',
+                          currency: 'usd'
+                        })
   end
 end

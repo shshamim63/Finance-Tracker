@@ -1,6 +1,6 @@
 class Plan < ApplicationRecord
 
   def self.options
-    Plan.all.map {|plan| plan.name}
+    Plan.all.collect {|plan| [plan.name, plan.id]}
   end
 end
