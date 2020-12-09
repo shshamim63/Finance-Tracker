@@ -15,7 +15,7 @@ class User::RegistrationsController < Devise::RegistrationsController
           
           flash[:error] = "Please check registration errors" unless @payment.valid?
           begin
-            @payment.process_payment(resource.plan.price.to_i)
+            @payment.process_payment(resource.plan.price.to_i, resource.plan.name)
             @payment.save
           rescue Exception => e
             flash[:error] = e.message

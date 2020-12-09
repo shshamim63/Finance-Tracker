@@ -13,12 +13,12 @@ class Payment < ApplicationRecord
     (Date.today.year..(Date.today.year + 10)).to_a
   end
 
-  def process_payment
+  def process_payment(amount, plan)
     customer = Stripe::Customer.create({ email: email, card: token })
     
     Stripe::Charge.create({ customer: customer.id,
-                          amount: 10000,
-                          description: 'Premium',
+                          amount: (amount * 100),
+                          description: plan,
                           currency: 'usd'
                         })
   end
