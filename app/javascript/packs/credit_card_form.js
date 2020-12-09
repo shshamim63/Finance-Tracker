@@ -1,3 +1,16 @@
+function GetURLParameter(sParam) {
+  var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split('&');
+  
+  for (var i = 0; i < sURLVariables.length; i++) {
+    var sParameterName = sURLVariables[i].split('=');
+  
+    if (sParameterName[0] == sParam) {
+      return sParameterName[1];
+    }
+  }
+};
+
 document.addEventListener("turbolinks:load", function() {
 
   var show_error, stripeResponseHandler, submitHandler;
@@ -15,6 +28,35 @@ document.addEventListener("turbolinks:load", function() {
   };
 
   $(".cc_form").on('submit', submitHandler);
+
+  var handlePlanChange = function(plan_type, form) {
+    var $form = $(form);
+    if(plan_type == undefined) {
+      plan_type = $('#user_plan_id :selected').val();
+      console.log(plan_type);
+    }
+    if( plan_type !== "1") {
+      $('[data-stripe]').prop('required', true);
+      $form.off('submit');
+      $form.on('submit', submitHandler);
+      $('[data-stripe]').show();
+    } else {
+      $('[data-stripe]').hide();
+      $form.off('submit');
+      $('[data-stripe]').removeProp('required');
+    }
+    
+  }
+    
+    // Set up plan change event listener #user_plan id in the forms for class cc_form
+    
+  $("#user_plan_id").on('change', function(event) {
+    handlePlanChange($('#user_plan_id :selected').val(), ".cc_form");
+  });
+    
+    // call plan change handler so that the plan is set correctly in the drop down when the page loads
+    
+  handlePlanChange(GetURLParameter('plan'), ".cc_form");
   stripeResponseHandler = function (status, response) {
     var token, $form;
     $form = $('.cc_form');
