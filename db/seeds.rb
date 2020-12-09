@@ -8,17 +8,20 @@
 
 Plan.create!(
   price: 0.0,
-  name: 'Free'
+  name: 'Free',
+  stock_number: 5
 )
 
 Plan.create!(
   price: 10.0,
-  name: 'premium'
+  name: 'Premium',
+  stock_number: 20,
 )
 
 Plan.create!(
   price: 20.0,
-  name: 'Amaze'
+  name: 'Amaze',
+  stock_number: +1.0/0.0,
 )
 
 user1 = User.new(
