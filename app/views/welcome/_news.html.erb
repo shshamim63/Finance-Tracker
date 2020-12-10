@@ -1,0 +1,20 @@
+<h2>Top Stocks News</h2>
+<% @popular_stock_news.each do |news|%>
+  <h4><%= news.symbol %></h4>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <% news.news.first(2).each do |target_news| %>
+      <%= link_to target_news["url"], target: :_blank do%>
+        <div class="col">
+          <div class="card">
+            <img src="<%=target_news["image"]%>" class="card-img-size card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%=truncate(target_news["headline"], :length => 50, :separator => ' ')%></h5>
+              <p class="card-text"><%=truncate(target_news["summary"], :length => 70, :separator => ' ')%></p>
+              <p class="card-text"><small class="text-muted"><%= Date.strptime((target_news["datetime"].to_f/1000).to_s , '%s')%></small></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %> 
+  </div>
+<% end %>  
