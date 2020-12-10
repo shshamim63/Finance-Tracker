@@ -12,4 +12,16 @@ class Stock < ApplicationRecord
       looked_up_stock = nil
     end
   end
+
+  def self.selected_stock_names(selected_ids)
+    where(id: selected_ids).map {|rec| rec.ticker}
+  end
+
+  def self.popular_ticker_news(ticker_symbols)
+    begin
+      recent_stocks = StockQuote::Stock.news(ticker_symbols, 2)
+    rescue Exception => e
+      recent_stocks = nil
+    end
+  end
 end
