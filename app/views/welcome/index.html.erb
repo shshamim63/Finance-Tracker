@@ -38,3 +38,8 @@
     </div>
   </div>
 <% end %>
+<%if @popular_stock_news %>
+  <%= render 'welcome/news'%>
+<%else%>
+  Lets add some
+<% end %>
