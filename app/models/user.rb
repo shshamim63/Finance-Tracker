@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
+  has_one :payment
+  belongs_to :plan
+  accepts_nested_attributes_for :payment
+  
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
 
@@ -22,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def under_stock_limit?
-    (user_stocks.count < 2)
+    (user_stocks.count < self.plan.stock_number)
   end
 
   def can_add_stock?(stock_symbol)

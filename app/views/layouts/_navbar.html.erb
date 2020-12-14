@@ -24,6 +24,10 @@
           <li class="nav-item">
             <%= link_to "Logout", destroy_user_session_path, class: 'nav-link btn btn-sm btn-danger', method: :delete%>
           </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "SignIn", new_user_session_path, class: 'nav-link btn btn-sm btn-info' %>
+          </li>
         <% end %>
       </ul>
     </div>

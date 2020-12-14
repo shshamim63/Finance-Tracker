@@ -17,12 +17,12 @@
           </div>
         <% else %>
         <div class="badge badge-primary text-wrap" style="width: 6rem;">
-          Stock cannot be added because you have added
+          Stock cannot be added
           <% if !current_user.under_stock_limit?%>
-            10 stocks
+            <%= "Exceeds #{current_user.plan.stock_number} stocks under #{current_user.plan.name} plan" %>
           <% end %>
           <% if current_user.stock_already_added?(@stock.ticker)%>
-            this stock already.
+            Exists already.
           <% end %>
         </div>
         <% end %>
