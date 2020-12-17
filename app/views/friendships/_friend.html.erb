@@ -1,7 +1,7 @@
 <div class="col-lg-5 d-flex justify-content-between align-items-center bg-friend">
   <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-border" width="150">
   <div class= "friend-info">
-    <p class= "friend-username"><%= user.username %></p>
+    <%= link_to "#{user.username}", user_path(user), class: "friend-username" %>
     <p class= "friend-username"><%= user.full_name %></p>
   </div>
   <div class="btn-group small-height">
