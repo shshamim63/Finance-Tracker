@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers=> { :registrations=> 'user/registrations'}
   root 'welcome#index'
+  get 'about', to: "welcome#about"
   get 'my_stocks', to: "users#my_stocks" 
   get 'stock_search', to: "stocks#search"
   resources :user_stocks, only: [:create, :destroy]
