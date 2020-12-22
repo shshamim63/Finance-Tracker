@@ -4,19 +4,16 @@
 </div>
 <div class="chatbox">
   <div class="chatsection">
-    <div class="chat-container">
-      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Avatar" style="width:100%;">
-      <p>Hello. How are you today?</p>
-      <span class="time-right">11:00</span>
-    </div>
+    <%= render @messages%>
   </div>
-  <form class="mt-3">
+  <%= form_for(@message, html: { class: "mt-3", role: "form" }, url: messages_path) do |f|  %>
     <div class="form-group row">
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputPassword" placeholder="Place your message">
+        <%= f.text_field :body, class: "form-control", id: "inputmessage", placeholder:"Place your message"%>
       </div>
-      <button type="submit" class="btn btn-success col-sm-2 col-form-label">
-      <i class="fas fa-check-circle mr-1"></i>send</button>
+      <%= button_tag(type: :submit, class: 'btn btn-success col-sm-2 col-form-label') do%>
+        <i class="fas fa-check-circle mr-1"></i> send
+      <% end %>
     </div>
-  </form>
+  <% end %>
 </div>
