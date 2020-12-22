@@ -6,6 +6,7 @@
 
 <% if @friends%>
   <div class="container mt-4">
+    <h4 class="symbol-heading">Friends</h4>
     <div class="row justify-content-around">
     <% @friends.each do |friend|%>
       <%= render 'friendships/friend', user: friend%>

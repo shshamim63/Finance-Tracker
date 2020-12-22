@@ -5,13 +5,13 @@
         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
           <li>
+            <%= link_to 'Home', root_path%>
+          </li>  
+          <li>
             <%= link_to "Stocks", my_stocks_path%>
           </li>
           <li>
             <%= link_to 'Friends', friends_path%>
-          </li>
-          <li>
-            <a href="#">Home 3</a>
           </li>
         </ul>
       </li>
@@ -32,9 +32,11 @@
           </li>
         </ul>
       </li>
-      <li>
-        <a href="#">Portfolio</a>
-      </li>
+      <% if current_user %>
+        <li>
+          <%= link_to 'Portfolio', user_path(current_user)%>
+        </li>
+      <% end %>
       <li>
         <a href="#">Contact</a>
       </li>
