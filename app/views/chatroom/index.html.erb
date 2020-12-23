@@ -3,16 +3,18 @@
   <i class="fas fa-comments chaticon"></i>
 </div>
 <div class="chatbox">
-  <div class="chatsection">
-    <%= render @messages%>
+  <div class="chat-body", id="body-chat">
+    <div class="chatsection", id="chat-container">
+      <%= render @messages%>
+    </div>
   </div>
-  <%= form_for(@message, html: { class: "mt-3", role: "form" }, url: messages_path) do |f|  %>
+  <%= form_for(@message, html: { class: "mt-3", role: "form" }, url: messages_path, remote: true) do |f|  %>
     <div class="form-group row">
       <div class="col-sm-10">
         <%= f.text_field :body, class: "form-control", id: "inputmessage", placeholder:"Place your message"%>
       </div>
-      <%= button_tag(type: :submit, class: 'btn btn-success col-sm-2 col-form-label') do%>
-        <i class="fas fa-check-circle mr-1"></i> send
+      <%= button_tag(type: :submit, class: 'btn btn-success col-sm-2 col-form-label', id:"messagesubmit") do%>
+        <i class="fas fa-keyboard"></i> send
       <% end %>
     </div>
   <% end %>

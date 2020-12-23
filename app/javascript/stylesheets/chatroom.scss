@@ -5,10 +5,13 @@
   width: 80%;
   margin: auto;
 }
-.chatsection {
+
+.chat-body{
   height: 19rem;
+}
+
+.chatsection {
   background-color: antiquewhite;
-  
 }
 
 .chat-container {
@@ -52,4 +55,8 @@
 .time-left {
   float: left;
   color: #999;
+}
+
+#body-chat {
+  overflow: auto;
 }
