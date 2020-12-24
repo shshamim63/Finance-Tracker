@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: :friend_id
   
+  has_many :messages
+  
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
     "anonymous"

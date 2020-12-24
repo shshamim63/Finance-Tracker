@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   get 'about', to: "welcome#about"
   get 'my_stocks', to: "users#my_stocks" 
   get 'stock_search', to: "stocks#search"
+  get 'chatroom', to: "chatroom#index"
   resources :user_stocks, only: [:create, :destroy]
   get 'search_users', to: "users#search"
   get 'friends', to: 'users#friends'
+  mount ActionCable.server, at: '/cable'
+  resources 'messages', only: [:create]
   resources :users, only: [:index, :show] do
     resources :friendships, only: [] do
       collection do

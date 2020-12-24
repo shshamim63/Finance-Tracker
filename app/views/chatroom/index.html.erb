@@ -1,0 +1,21 @@
+<div class="container text-center">
+  <h3>Lets Chat</h3>
+  <i class="fas fa-comments chaticon"></i>
+</div>
+<div class="chatbox">
+  <div class="chat-body", id="body-chat">
+    <div class="chatsection", id="chat-container">
+      <%= render @messages%>
+    </div>
+  </div>
+  <%= form_for(@message, html: { class: "mt-3", id:'message-form', role: "form" }, url: messages_path, remote: true) do |f|  %>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <%= f.text_field :body, class: "form-control", id: "inputmessage", placeholder:"Place your message"%>
+      </div>
+      <%= button_tag(type: :submit, class: 'btn btn-success col-sm-2 col-form-label', id:"messagesubmit") do%>
+        <i class="fas fa-keyboard"></i> send
+      <% end %>
+    </div>
+  <% end %>
+</div>
