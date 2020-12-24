@@ -6,15 +6,19 @@ scroll_bottom = function() {
 
 submit_message = function() {
   $('#inputmessage').on('keydown', function(e){
-    console.log('I am here');
     if(e.keyCode === 13) {
       $('#messagesubmit').click();
       e.target.value = '';
     }
   });
 }
-
+submit_button = function() {
+  $("#message-form").bind("ajax:complete", function(event,xhr,status){
+    $('#inputmessage')[0].value='';
+  });
+};
 document.addEventListener("turbolinks:load", function() {
   scroll_bottom();
   submit_message();
+  submit_button();
 });
