@@ -1,0 +1,47 @@
+<% if current_user %>
+  <h3>Welcome: <%= current_user.full_name %></h3>
+
+  <div class="jumbotron">
+    <h2>Welcome to the Stock Management App!</h2>
+    <p class="lead">
+      You'll love managing your Stocks with our application. Sign up!
+    </p>
+  </div>
+
+  <div class="plans">
+    <div class="row justify-content-around clearfix">
+      <% @plans.each do |plan| %>
+        <div class="col-md-4 ">
+          <h2 class="scheme">
+            <%= plan.name%> Plan
+          </h2>
+          <%if current_user.plan == plan %>
+            <span class="badge badge-success">Subscribed</span>
+          <% end %>
+          <div class="price pull-right">
+            Price: <%= "$#{plan.price}"%>
+          </div>
+          <div class="features">
+            <ul>
+              <li>Unlimited Friends</li>
+              <li>Responsive design</li>
+              <li>Access anywhere</li>
+              <% if plan.name == 'Free' %>
+                <li>Trackable Stock: <%= plan.stock_number %></li>
+              <% elsif plan.name == 'Premium'%>
+              <li>Trackable Stock: <%= plan.stock_number %></li>
+              <% else %>
+              <li>Trackable Stock: Unlimited</li>
+              <% end %>
+            </ul>
+          </div>
+          <p>
+            <% unless current_user.plan == plan %>
+              <%= link_to 'Upgrade', edit_plan_path(plan: plan), class: 'btn btn-primary sign-up' %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
