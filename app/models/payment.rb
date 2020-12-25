@@ -2,7 +2,7 @@ class Payment < ApplicationRecord
   attr_accessor :card_number, :card_cvc, :expired_month, :expired_year
   
   belongs_to :user
-  
+
   def self.month_options
     month_list = []
     Date::MONTHNAMES.compact.each_with_index { |val, idx| month_list.push([val, idx+1]) }
