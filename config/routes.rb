@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :user_stocks, only: [:create, :destroy]
   get 'search_users', to: "users#search"
   get 'friends', to: 'users#friends'
+  match 'current/plans', to: 'plans#index', via: [:get]
+  match 'plan/edit', to: 'users#edit', via: [:get], as: :edit_plan
+  match 'plan/update', to: 'users#update', via: [:put, :patch], as: :update_plan
   mount ActionCable.server, at: '/cable'
   resources 'messages', only: [:create]
   resources :users, only: [:index, :show] do
