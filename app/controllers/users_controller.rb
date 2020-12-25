@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   skip_before_action :authenticate_user!, only: [:my_stocks]
+  before_action :set_update_user, only: [:edit, :update]
+  before_action :authorized_user, only: [:update]
   def show
     @blocked_users = current_user.active_blocked_user
     @user_stocks = @user.stocks
@@ -30,10 +32,57 @@ class UsersController < ApplicationController
       format.js { render partial: 'users/userslist' }
     end
   end
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      User.transaction do 
+        current_plan = @user.plan
+        if @user.update(plan_id: params["user"]["plan_id"])
+          unless @user.plan.name == "Free"
+            @payment = Payment.new({  email: params["user"]["email"],
+                                    token: params[:payment]["token"],
+                                    user_id: @user.id,
+                                    plan_id: @user.plan.id
+                                })
+            begin
+              @payment.process_payment(@user.plan.price.to_i, @user.plan.name)
+              @payment.save
+            rescue Exception => e
+              flash[:error] = e.message
+              @payment.destroy
+              @user.plan = current_plan
+              @user.save
+              redirect_to edit_plan_path(@user) and return
+            end
+          end
+          format.html { redirect_to edit_plan_path(@user), notice: 'Plan was successfully updated.' }
+        else
+          format.html { render :edit }
+        end
+      end
+    end
+  end
 
   private
 
   def set_user
     @user = User.find_by(id: params[:id])
+  end
+
+  def set_update_user
+    @user = current_user
+  end
+
+  def authorized_user
+    if current_user.email == params["user"]["email"]
+      if (@targetuser = User.find_by_email(params[:payment][:email])) && @user.valid_password?(params[:user][:password])
+        @user= current_user
+      end
+    else
+      flash[:error] = "Invalid email/password"
+      render :edit
+    end
   end
 end
