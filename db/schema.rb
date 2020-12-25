@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_22_131557) do
+ActiveRecord::Schema.define(version: 2020_12_24_093630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_12_22_131557) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "plan_id", null: false
+    t.index ["plan_id"], name: "index_payments_on_plan_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 2020_12_22_131557) do
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "messages", "users"
+  add_foreign_key "payments", "plans"
   add_foreign_key "user_stocks", "stocks"
   add_foreign_key "user_stocks", "users"
   add_foreign_key "users", "plans"
