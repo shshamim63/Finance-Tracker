@@ -16,6 +16,9 @@ class User < ApplicationRecord
   
   has_many :messages
   
+  validates :first_name, :last_name, presence: true
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
     "anonymous"
