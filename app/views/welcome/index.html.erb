@@ -38,7 +38,7 @@
     </div>
   </div>
 <% end %>
-<%if @popular_stock_news %>
+<%if @popular_stock_news.size > 0 %>
   <%= render 'welcome/news'%>
 <%else%>
   <div class="lets-add">
