@@ -26,24 +26,24 @@ document.addEventListener("turbolinks:load", function() {
     }
     return false;
   };
-
   $(".cc_form").on('submit', submitHandler);
 
   var handlePlanChange = function(plan_type, form) {
     var $form = $(form);
     if(plan_type == undefined) {
       plan_type = $('#user_plan_id :selected').val();
-      console.log(plan_type);
     }
     if( plan_type !== "1") {
+      console.log("I am here")
       $('[data-stripe]').prop('required', true);
       $form.off('submit');
       $form.on('submit', submitHandler);
       $('[data-stripe]').show();
     } else {
+      console.log("I am here free")
       $('[data-stripe]').hide();
       $form.off('submit');
-      $('[data-stripe]').removeProp('required');
+      $('[data-stripe]').prop('required', false);
     }
     
   }
@@ -69,7 +69,7 @@ document.addEventListener("turbolinks:load", function() {
       token = response.id;
       $form.append($("<input type=\"hidden\" name=\"payment[token]\" />").val(token));
       $("[data-stripe=number]").remove();
-      $("[data-stripe=cvv]").remove();
+      $("[data-stripe=cvc]").remove();
       $("[data-stripe=exp-year]").remove();
       $("[data-stripe=exp-month]").remove();
       $("[data-stripe=label]").remove();

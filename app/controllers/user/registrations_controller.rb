@@ -10,7 +10,8 @@ class User::RegistrationsController < Devise::RegistrationsController
         unless resource.plan.name == "Free"
           @payment = Payment.new({  email: params["user"]["email"],
                                     token: params[:payment]["token"],
-                                    user_id: resource.id
+                                    user_id: resource.id,
+                                    plan_id: resource.plan.id
                                 })
           
           flash[:error] = "Please check registration errors" unless @payment.valid?
