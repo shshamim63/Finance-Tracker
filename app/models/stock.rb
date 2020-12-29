@@ -1,6 +1,8 @@
 class Stock < ApplicationRecord
   has_many :user_stoks
   has_many :users, through: :user_stocks
+
+  validates :name, :ticker, :last_price, presence: true
   
   def self.find_by_ticker(ticker_symbol)
     where(ticker: ticker_symbol).first

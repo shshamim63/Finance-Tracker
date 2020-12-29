@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Message, type: :model do
   describe 'validates message' do
+    
     context "When all fields are given" do
       let(:message) { build(:message)}
+
       it "creates message if all fileds are filled" do
         expect(message).to be_valid
       end
