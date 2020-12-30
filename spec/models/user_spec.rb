@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
 
       it 'Invalid user when username is not unique' do
         user = create(:user)
-        user1 = build(:user)
+        user1 = build(:user, username: user.username)
         expect(user1).not_to be_valid
       end
       
