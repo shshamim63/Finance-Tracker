@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
       
       it 'Invalid user when username does not signup with a valid plan' do
         user = build(:user)
-        user.plan_id=nil
+        user.plan_id = nil
         expect(user).not_to be_valid
       end
     end
