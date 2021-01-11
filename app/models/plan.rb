@@ -1,4 +1,5 @@
 class Plan < ApplicationRecord
+  validates :name, :price, presence: true
 
   scope :available_plan, ->(plan) { where.not(id: plan) }
   def self.options

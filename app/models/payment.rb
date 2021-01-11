@@ -1,6 +1,7 @@
 class Payment < ApplicationRecord
   attr_accessor :card_number, :card_cvc, :expired_month, :expired_year
   
+  validates :email, :token, presence: true
   belongs_to :user
 
   def self.month_options
