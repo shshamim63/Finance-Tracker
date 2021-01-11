@@ -7,7 +7,7 @@ class Friendship < ApplicationRecord
   validate :check_request_eligibility, on: :create
 
   def check_request_eligibility
-    if  Friendship.current_status?(self.user, self.friend)&.status == 'blocked'
+    if  Friendship.current_status?(self.user, self.friend)&.status == 'blocked' and self.status != 'unblocked'
       errors.add(:status, 'You have/are blocked')
     end
   end

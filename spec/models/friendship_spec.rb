@@ -20,6 +20,14 @@ RSpec.describe Friendship, type: :model do
       end
     end
 
+    context "when you are/have blocked a user" do
+      it "creates instance of unblocked if the last status is blocked" do
+        friendship_blocked = create(:friendship, user: user, friend: friend, status: 'blocked')
+        friendship_rejected = build(:friendship, user: user, friend: friend, status: 'unblocked')
+        expect(friendship_rejected).to be_valid
+      end
+    end
+
     context "When fileds left empty" do
       let(:friendship) { build(:friendship, status: 'rejected')}
       
@@ -35,28 +43,28 @@ RSpec.describe Friendship, type: :model do
     end
   end
 
-  # describe "current_status?" do
-  #   let(:user) { create(:user)}
-  #   let(:friend) { create(:user)}
+  describe "current_status?" do
+    let(:user) { create(:user)}
+    let(:friend) { create(:user)}
 
-  #   context "When users are still friends." do
-  #     let!(:friendship_rejected) { create(:friendship, user: user, friend: friend, status: 'rejected') }
-  #     let!(:friendship_accepted) { create(:friendship, user: user, friend: friend, status: 'accepted') }
+    context "When users are still friends." do
+      let!(:friendship_rejected) { create(:friendship, user: user, friend: friend, status: 'rejected') }
+      let!(:friendship_accepted) { create(:friendship, user: user, friend: friend, status: 'accepted') }
 
-  #     it "is still a friend" do
-  #       access = described_class.current_status?(user, friend)
-  #       expect(access.status).to eq("accepted")
-  #     end
-  #   end
+      it "is still a friend" do
+        access = described_class.current_status?(user, friend)
+        expect(access.status).to eq("accepted")
+      end
+    end
 
-  #   context "When users are not friend anymore" do
-  #     let!(:friendship_rejected) { create(:friendship, user: user, friend: friend, status: 'accepted') }
-  #     let!(:friendship_accepted) { create(:friendship, user: friend, friend: user, status: 'rejected') }
+    context "When users are not friend anymore" do
+      let!(:friendship_rejected) { create(:friendship, user: user, friend: friend, status: 'accepted') }
+      let!(:friendship_accepted) { create(:friendship, user: friend, friend: user, status: 'rejected') }
       
-  #     it "is still a friend" do
-  #       access = described_class.current_status?(user, friend)
-  #       expect(access.status).to eq("rejected")
-  #     end
-  #   end
-  # end
+      it "is still a friend" do
+        access = described_class.current_status?(user, friend)
+        expect(access.status).to eq("rejected")
+      end
+    end
+  end
 end
