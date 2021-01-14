@@ -1,0 +1,12 @@
+<div class="blocked-user-container">
+  <div class="blocked-item-container">
+    <i class="fas fa-user-lock fa-5x"></i>
+    <p class='blocked-user-text mt-2'>This content is not available at this time</p>
+    <p class='blocked-user-content'>This happens when the owner only shares it with a limited group of people, changes who sees it, or deletes it.
+    </p>
+    <div class='d-flex flex-column'>
+      <%= link_to 'Home', root_path, class: 'btn btn-md btn-info blocked-user-home-button'%>
+      <%= link_to "Go back", request.referer.present? ? request.referer : root_path, class: 'blocked-user-go-back mt-1'%>
+    </div>
+  </div>
+</div>
