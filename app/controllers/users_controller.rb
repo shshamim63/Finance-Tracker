@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_unblocked_user, only: [:show]
   skip_before_action :authenticate_user!, only: [:my_stocks]
   before_action :set_update_user, only: [:edit, :update]
   before_action :authorized_user, only: [:update]
+  
   def show
     @blocked_users = current_user.active_blocked_user
     @user_stocks = @user.stocks
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
       format.js { render partial: 'users/userslist' }
     end
   end
+  
   def edit
   end
 
@@ -67,8 +69,13 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find_by(id: params[:id])
+  def set_unblocked_user
+    set_user = User.find_by(id: params[:id])
+    if Friendship.current_status?(current_user, set_user)&.blocked?
+      render 'blocked_user'
+    else
+      @user = set_user
+    end
   end
 
   def set_update_user
