@@ -1,4 +1,7 @@
 class Stock < ApplicationRecord
+  
+  require 'json'
+
   has_many :user_stoks
   has_many :users, through: :user_stocks
 
@@ -6,6 +9,15 @@ class Stock < ApplicationRecord
   
   def self.find_by_ticker(ticker_symbol)
     where(ticker: ticker_symbol).first
+  end
+
+  def self.new_stock_symbol_lookup(company_name)
+    begin
+      response = HTTParty.get("http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=#{company_name}&region=1&lang=en&callback=YAHOO.Finance.SymbolSuggest.ssCallback").to_s
+      stock_symbol = JSON.parse(response[39...-2])['ResultSet']['Result'][0]['symbol']
+    rescue Exception => e
+      stock_symbol = nil
+    end
   end
 
   def self.new_from_lookup(ticker_symbol)
