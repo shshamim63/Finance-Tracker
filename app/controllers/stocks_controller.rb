@@ -6,6 +6,7 @@ class StocksController < ApplicationController
       flash.now[:danger] = 'You have entered an empty string'
     else
       stock_ticker = Stock.new_stock_symbol_lookup(params[:stock])
+      @stock = nil
       if stock_ticker
         @stock = Stock.new_from_lookup(stock_ticker)
       else
