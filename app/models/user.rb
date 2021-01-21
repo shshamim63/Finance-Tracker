@@ -54,6 +54,14 @@ class User < ApplicationRecord
     (friends + inverse_friends).compact.uniq
   end
 
+  def pending_friend_request
+    pending_request = friendships.map do |friendship|
+      friend = friendship.friend
+      friend if Friendship.current_status?(friend, self)&.pending?
+    end
+    pending_request.compact.uniq
+  end
+
   def active_blocked_user
     friends = friendships.map do |friendship|
       friend = friendship.friend
