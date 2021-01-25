@@ -55,8 +55,8 @@ class User < ApplicationRecord
   end
 
   def pending_friend_request
-    pending_request = friendships.map do |friendship|
-      friend = friendship.friend
+    pending_request = inverse_friendships.map do |friendship|
+      friend = friendship.user
       friend if Friendship.current_status?(friend, self)&.pending?
     end
     pending_request.compact.uniq

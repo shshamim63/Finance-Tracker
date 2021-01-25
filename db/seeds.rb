@@ -26,7 +26,7 @@ Plan.create!(
 
 user1 = User.new(
   first_name: 'Shakhawat',
-  last_name: 'Hossaim',
+  last_name: 'Hossain',
   username: 'shshamim63',
   email: 'shshamim63@gmail.com',
   password: '123456',
