@@ -22,6 +22,32 @@
         </li>
         <% if current_user %>
           <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-friends color-cornflowerblue"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% if pending_requests = current_user.pending_friend_request %>
+                  <% pending_requests.each do |requester|%>
+                    <div class="dropdown-item">
+                      <p class=''><%= requester.full_name %></p>
+                      <div class="btn-group">
+                        <%= link_to cancelled_user_friendships_path(requester), method: :post, class: 'btn btn-sm btn-outline-dark' do %>
+                          <i class="fas fa-user-times"></i> Cancel Request
+                        <% end %>
+                        <%= link_to accept_user_friendships_path(requester), method: :post, class: 'btn btn-sm btn-outline-success' do %>
+                          <i class="fas fa-check-circle"></i> Accept
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="dropdown-item">You</div>
+                <% end %>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
             <%= link_to 'Profile', edit_user_registration_path, class: 'nav-link'%>
           </li>
           <li class="nav-item">

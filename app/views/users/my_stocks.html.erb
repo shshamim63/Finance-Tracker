@@ -3,7 +3,7 @@
   <%= form_tag stock_search_path, remote: true, method: :get, id: 'stock-lookup-form' do%>
     <div class="from-group row no-padding text-center col-md-12">
       <div class="col-md-10">
-        <%= text_field_tag :stock, params[:stock], placeholder: 'Stcok ticker symbol', autofocus: true, class: 'form-control search-box input-lg' %>
+        <%= text_field_tag :stock, params[:stock], placeholder: 'Company name/symbol', autofocus: true, class: 'form-control search-box input-lg' %>
       </div>
       <div>
         <%= button_tag(type: :submit, class: 'btn btn-md btn-success') do%>

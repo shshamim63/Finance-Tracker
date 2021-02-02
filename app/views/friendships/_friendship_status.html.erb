@@ -18,7 +18,7 @@
   <% if current_status&.pending?%>
     <% if current_user == current_status.user %>
       <%= link_to cancelled_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-dark' do %>
-        <i class="fas fa-user-times"></i> Candel Request
+        <i class="fas fa-user-times"></i> Cancel Request
       <% end %>
     <% else %>
       <%= link_to accept_user_friendships_path(@user), method: :post, class: 'btn btn-sm btn-outline-success' do %>
