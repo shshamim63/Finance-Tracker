@@ -1,11 +1,14 @@
-class MessagesController < ApplicationController
+# frozen_string_literal: true
 
+class MessagesController < ApplicationController
   def create
     message = current_user.messages.build(message_params)
-    if message.save
-      ActionCable.server.broadcast "chatroom_channel",
-                                    modified_message: message_render(message)
-    end
+    return unless message.save
+
+    ActionCable.server.broadcast(
+      'chatroom_channel',
+      modified_message: message_render(message)
+    )
   end
 
   private
@@ -15,6 +18,6 @@ class MessagesController < ApplicationController
   end
 
   def message_render(message)
-    render(partial: 'message', locals: { message: message})
+    render(partial: 'message', locals: { message: message })
   end
 end
