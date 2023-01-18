@@ -130,7 +130,7 @@ GEM
     pg (1.2.3)
     puma (4.3.5)
       nio4r (~> 2.0)
-    rack (2.2.3)
+    rack (2.2.6.2)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -239,8 +239,6 @@ GEM
     websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    yahoofinance-symbolsuggest (0.1.0)
-      json
     zeitwerk (2.3.0)
 
 PLATFORMS
@@ -272,7 +270,6 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
-  yahoofinance-symbolsuggest (~> 0.1.0)
 
 RUBY VERSION
    ruby 2.7.1p83
